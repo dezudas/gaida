@@ -1,4 +1,4 @@
-<a align="center" href="https://milligram.github.io"><img width="100%" src="https://milligram.github.io/images/thumbnail.png" alt="Milligram - A minimalist CSS framework on SCSS version."></a>
+
 
 > A minimalist CSS framework on SCSS version.
 
@@ -62,3 +62,4 @@ Want to contribute? Follow these [recommendations](https://github.com/milligram/
 ## License
 
 Designed with ♥ by [CJ Patoilo](http://cjpatoilo.com). Licensed under the [MIT License](http://cjpatoilo.mit-license.org).
+Updatede by Dijup Tuladhar
