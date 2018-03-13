@@ -1,6 +1,6 @@
 
 
-> A minimalist CSS framework on SCSS version.
+> A minimalist CSS framework on SCSS version, forked from Milligram.
 
 [![Travis Status](https://travis-ci.org/milligram/milligram-scss.svg?branch=master)](https://travis-ci.org/milligram/milligram-scss?branch=master)
 [![AppVeyor Status](https://ci.appveyor.com/api/projects/status/e2se4f2brk6kwov4?svg=true)](https://ci.appveyor.com/project/cjpatoilo/milligram-scss)
