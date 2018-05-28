@@ -65,7 +65,7 @@
     "sass-lint": "^1.10.2"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "scripts": {
     "start": "run-p build watch",
