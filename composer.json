@@ -1,12 +1,12 @@
 {
-	"name": "milligram/milligram-scss",
-	"version": "1.3.0",
+	"name": "dezudas/gaida",
+	"version": "1.0.1",
 	"description": "A minimalist CSS framework on SCSS version.",
-	"homepage": "https://milligram.github.io",
-	"repository": "milligram/milligram-scss",
+	"homepage": "https://dezudas.github.io/gaida/",
+	"repository": "dezudas/gaida",
 	"license": "MIT",
-	"author": "CJ Patoilo <cjpatoilo@gmail.com>",
-	"main": "dist/milligram.scss",
+	"author": "Dijup Tuladhar <dezudas@gmail.com>",
+	"main": "dist/gaida.scss",
 	"keywords": [
 		"bootstrap",
 		"css",

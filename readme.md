@@ -1,30 +1,23 @@
 
+Gaida UI Framework
+=========
 
-> A minimalist CSS framework on SCSS version, forked from Milligram.
+A CSS framework targeted to modern application with modular stractire, where UI framework is to maintain the Layout of the applications.
 
+> A minimalist CSS framework, forked from Milligram to make it more robust CSS framework to support challenges. 
 
-## Download
-
-**Install with Bower**
-
-```sh
-$ bower install gaida
-```
-
+## Installation
 **Install with npm**
 
 ```sh
 $ npm install gaida
 ```
 
-**Install with Yarn**
+**Install with yarn**
 
 ```sh
 $ yarn add gaida
 ```
-
-
-
 
 
 ## Contributing
@@ -34,5 +27,4 @@ Want to contribute?
 
 ## License
 
-Designed with ♥ by [CJ Patoilo](http://cjpatoilo.com). Licensed under the [MIT License](http://cjpatoilo.mit-license.org).
-Updatede by Dijup Tuladhar
+Maintained by Dijup Tuladhar

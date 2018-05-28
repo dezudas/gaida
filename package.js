@@ -1,6 +1,6 @@
 Package.describe({
 	name: 'gaida',
-	version: '1.0.0',
+	version: '1.0.1',
 	summary: 'A minimalist CSS framework on SCSS version.',
 	git: 'https://github.com/dezudas/gaida.git',
 	documentation: 'readme.md'

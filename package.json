@@ -1,80 +1,91 @@
 {
-	"name": "gaida",
-	"version": "1.0.2",
-	"description": "A minimalist CSS framework on SCSS version.",
-	"homepage": "https://gaida.github.io",
-	"repository": "dezudas/gaida",
-	"license": "MIT",
-	"author": "Dijup Tuladhar <dezudas@gmail.com>",
-	"main": "dist/gaida.scss",
-	"keywords": [
-		"bootstrap",
-		"css",
-		"css3",
-		"flexbox",
-		"front-end",
-		"framework",
-		"html",
-		"html5",
-		"kickstarter",
-		"less",
-		"responsive",
-		"mobile",
-		"mobile-first",
-		"postcss",
-		"responsive",
-		"sass",
-		"scss",
-		"stylus"
-	],
-	"ignore": [
-		".appveyor.yml",
-		".editorconfig",
-		".eslintrc",
-		".github",
-		".gitignore",
-		".sasslintrc",
-		".travis.yml",
-		"bower.json",
-		"changelog.md",
-		"composer.json",
-		"package.js",
-		"package.json",
-		"src",
-		"test"
-	],
-	"dependencies": {
-		"normalize.css": "~5.0.0"
-	},
-	"devDependencies": {
-		"autoprefixer": "^6.5.3",
-		"banner-cli": "^0.9.2",
-		"copycopy": "0.0.2",
-		"editorconfig-tools": "^0.1.1",
-		"eslint": "^3.14.0",
-		"eslint-config-styled": "^0.0.0",
-		"husky": "^0.11.9",
-		"node-sass": "^3.13.0",
-		"npm-run-all": "^2.3.0",
-		"onchange": "^2.5.0",
-		"postcss-cli": "^2.6.0",
-		"rimraf": "^2.5.4",
-		"sass-lint": "^1.10.2"
-	},
-	"engines": {
-		"node": ">=4"
-	},
-	"scripts": {
-		"start": "run-p build watch",
-		"build": "run-s clean copy banner sass autoprefixer",
-		"clean": "rimraf dist",
-		"sass": "node-sass --output-style expanded src/gaida.scss test/gaida.css && node-sass --output-style compressed src/gaida.scss test/gaida.min.css",
-		"autoprefixer": "postcss -u autoprefixer --no-map.inline --autoprefixer.browsers \"last 1 versions\" -r test/*.css",
-		"copy": "copycopy src/**/* dist",
-		"banner": "banner-cli dist/*.scss",
-		"watch": "onchange src -- run-p build",
-		"lint": "sass-lint -c .sasslintrc src/*.scss --verbose --no-exit && eslint test -c styled && editorconfig-tools check .",
-		"test": "run-s build lint",
-		"precommit": "run-p test"
-	}
+  "name": "gaida",
+  "version": "1.0.2",
+  "description": "A minimalist CSS framework on SCSS version with modern grid system avalanche.",
+  "homepage": "https://dezudas.github.io/gaida",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dezudas/gaida.git"
+  },
+  "license": "MIT",
+  "author": "Dijup Tuladhar <dezudas@gmail.com>",
+  "main": "dist/gaida.scss",
+  "keywords": [
+    "bootstrap",
+    "css",
+    "css3",
+    "flexbox",
+    "front-end",
+    "framework",
+    "html",
+    "html5",
+    "kickstarter",
+    "less",
+    "responsive",
+    "mobile",
+    "mobile-first",
+    "postcss",
+    "responsive",
+    "sass",
+    "scss",
+    "stylus"
+  ],
+  "ignore": [
+    ".appveyor.yml",
+    ".editorconfig",
+    ".eslintrc",
+    ".github",
+    ".gitignore",
+    ".sasslintrc",
+    ".travis.yml",
+    "bower.json",
+    "changelog.md",
+    "composer.json",
+    "package.js",
+    "package.json",
+    "src",
+    "test"
+  ],
+  "dependencies": {
+    "normalize.css": "~5.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.5.3",
+    "banner-cli": "^0.9.2",
+    "copycopy": "0.0.2",
+    "editorconfig-tools": "^0.1.1",
+    "eslint": "^3.14.0",
+    "eslint-config-styled": "^0.0.0",
+    "husky": "^0.11.9",
+    "node-sass": "^3.13.0",
+    "npm-run-all": "^2.3.0",
+    "onchange": "^2.5.0",
+    "postcss-cli": "^2.6.0",
+    "rimraf": "^2.5.4",
+    "sass-lint": "^1.10.2"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "start": "run-p build watch",
+    "build": "run-s clean copy banner sass autoprefixer",
+    "clean": "rimraf dist",
+    "sass": "node-sass --output-style expanded src/gaida.scss test/gaida.css && node-sass --output-style compressed src/gaida.scss test/gaida.min.css",
+    "autoprefixer": "postcss -u autoprefixer --no-map.inline --autoprefixer.browsers \"last 1 versions\" -r test/*.css",
+    "copy": "copycopy src/**/* dist",
+    "banner": "banner-cli dist/*.scss",
+    "watch": "onchange src -- run-p build",
+    "lint": "sass-lint -c .sasslintrc src/*.scss --verbose --no-exit && eslint test -c styled && editorconfig-tools check .",
+    "test": "run-s build lint",
+    "precommit": "run-p test"
+  },
+  "bugs": {
+    "url": "https://github.com/dezudas/gaida/issues"
+  },
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "test"
+  }
 }
