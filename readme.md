@@ -1,4 +1,10 @@
 
+[![Travis Status](https://travis-ci.org/dezudas/gaida.svg?branch=master)](https://travis-ci.org/dezudas/gaida.svg?branch=master)
+[![Download Status](https://img.shields.io/npm/dt/gaida.svg)](https://www.npmjs.com/package/gaida)
+[![Dependencies Status](https://david-dm.org/dezudas/gaida.svg)](https://david-dm.org/dezudas/gaida)
+[![npm version](https://badge.fury.io/js/gaida.svg)](https://badge.fury.io/js/gaida)
+[![CSS gzip size](http://img.badgesize.io/dezudas/gaida/blob/master/test/gaida.min.css?compression=gzip&label=CSS+gzip+size)](https://github.com/dezudas/gaida/blob/master/test/gaida.min.css)
+
 Gaida UI Framework
 =========
 
@@ -27,6 +33,9 @@ $ yarn add gaida
 
 Want to contribute? 
 
+## Versioning
+
+Maintained under [the Semantic Versioning guidelines](https://semver.org/).
 
 ## License
 

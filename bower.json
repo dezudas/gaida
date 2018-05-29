@@ -44,6 +44,6 @@
 		"test"
 	],
 	"dependencies": {
-		"normalize.css": "~5.0.0"
+		"normalize.css": "~8.0.0"
 	}
 }
