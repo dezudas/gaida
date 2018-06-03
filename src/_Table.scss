@@ -2,6 +2,7 @@
 // Table
 // ––––––––––––––––––––––––––––––––––––––––––––––––––
 
+/*
 table {
 	border-spacing: 0;
 	width: 100%;
@@ -20,4 +21,82 @@ th {
 	&:last-child {
 		padding-right: 0;
 	}
+}
+*/
+
+table {
+	width: 100%;
+	border-spacing: 0;
+	overflow: hidden;
+	@if $gd-tbl-striped {
+		tbody tr:nth-of-type(odd) {
+			background-color: $tbl-striped-bg;
+		}
+	}
+	@if $gd-tbl-hover {
+		tbody tr {
+			&:hover {
+				background-color: $tbl-row-hover-bgcolor;
+			}
+			&:active,&.active {
+				background-color: $tbl-row-active-bgcolor;
+			}
+		}
+	}
+	td {
+		input {
+			margin-bottom: 0;
+		}
+	}
+	td, th {
+		padding: 1.2rem;
+		border-bottom: 0.1rem solid $gray-20;
+		text-align: left;
+		transition: all ease 0.2s;
+		&:first-child {
+			padding-left: 0;
+		}
+		&:last-child {
+			padding-right: 0;
+		}
+	}
+
+}
+
+thead {
+	background-color: #fff;
+	overflow: visible;
+	th {
+		font-weight: normal;
+		border-bottom: 0.2rem solid $gray-40;
+		white-space: nowrap;
+		user-select: none;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-o-user-select: none;
+		&:hover {
+			cursor: default;
+		}
+		&.sortable {
+			i {
+				color: $gray-60;
+			}
+			&:hover {
+				cursor: pointer;
+			}
+			&.sort-active {
+				i {
+					color: $gray-90;
+				}
+			}
+		}
+	}
+}
+
+//No Data in Table
+.nodata {
+	font-size: 1.4rem;
+	font-weight: bold;
+	text-align: center;
+	color: $color-primary;
 }

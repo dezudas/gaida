@@ -1,0 +1,39 @@
+// Typography
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+$font-family-sans-serif:      "Karla", "Helvetica Neue", sans-serif !default;
+$font-family-serif:           "Lora", Menlo, Monaco, Consolas, !default;
+$font-family-monospace:       "Courier", monospace !default;
+$font-family-base:            $font-family-sans-serif !default;
+$font-size-base:              1.6rem !default;
+$text-muted:                  $gray-50;
+
+// Table
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+
+$gd-tbl-striped:          true !default;
+$gd-tbl-hover:            true !default;
+
+$tbl-row-hover-bgcolor:   #F2FBFB;
+$tbl-row-active-bgcolor:  #E5F6F7;
+$tbl-striped-bg:          rgba(0,0,0,.05);
+
+// Responsive breakpoints
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+$size-xs: 480px !default;
+$size-sm: 600px !default;
+$size-md: 840px !default;
+$size-lg: 960px !default;
+$size-xl: 1280px !default;
+$size-2x: 1440px !default;
+
+$layout-spacing: .4rem !default;
+$layout-spacing-sm: .2rem !default;
+$layout-spacing-lg: .8rem !default;
+
+// Font sizes
+$html-font-size: 20px !default;
+$html-line-height: 1.5 !default;
+$font-size: .8rem !default;
+$font-size-sm: .7rem !default;
+$font-size-lg: .9rem !default;
+$line-height: 1rem !default;

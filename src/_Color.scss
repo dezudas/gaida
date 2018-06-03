@@ -2,9 +2,21 @@
 // Color
 // ––––––––––––––––––––––––––––––––––––––––––––––––––
 
-$color-initial: #fff !default;
-$color-primary: #9b4dca !default;
-$color-secondary: #606c76 !default;
-$color-tertiary: #f4f5f6 !default;
-$color-quaternary: #d1d1d1 !default;
-$color-quinary: #e1e1e1 !default;
+$color-initial:     #fff !default;
+$color-primary:     #003893 !default;
+$color-secondary:   #606c76 !default;
+$color-tertiary:    #f4f5f6 !default;
+$color-quaternary:  #d1d1d1 !default;
+$color-quinary:     #e1e1e1 !default;
+
+// Gray
+// ––––––––––––––––––––––––––––––––––––––––––––––––––
+$gray-10:           #f8f9fa !default;
+$gray-20:           #e9ecef !default;
+$gray-30:           #dee2e6 !default;
+$gray-40:           #ced4da !default;
+$gray-50:           #adb5bd !default;
+$gray-60:           #6c757d !default;
+$gray-70:           #495057 !default;
+$gray-80:           #343a40 !default;
+$gray-90:           #212529 !default;

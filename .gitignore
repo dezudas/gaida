@@ -27,6 +27,7 @@ $RECYCLE.BIN/
 .node_repl_history
 .npm
 .nyc_output
+.idea
 Desktop.ini
 Icon
 Network Trash Folder
