@@ -38,6 +38,12 @@ test/
 └── gaida.min.css.map
 ```
 
+## CDN Link
+
+```
+https://cdn.jsdelivr.net/npm/gaida@1.0.5/dist/gaida.min.css
+```
+
 ## Contributing
 
 Want to contribute? 

@@ -72,7 +72,7 @@
     "start": "run-p build watch serve",
     "build": "run-s clean sass autoprefixer banner",
     "clean": "rimraf dist",
-    "sass": "node-sass --output-style expanded src/gaida.scss dist/gaida.css && node-sass --output-style compressed src/gaida.scss dist/gaida.min.css",
+    "sass": "node-sass --output-style expanded src/gaida.scss dist/gaida.css && node-sass --output-style compressed src/gaida.scss dist/gaida.min.css && node-sass --output-style compressed src/gaida.scss docs/css/gaida.min.css",
     "autoprefixer": "postcss -u autoprefixer --no-map.inline --autoprefixer.browsers \"last 1 versions\" -r dist/*.css",
     "banner": "banner-cli dist/*.css",
     "watch": "onchange src -- run-p build",
@@ -86,7 +86,8 @@
     "precommit": "run-p test"
   },
   "bugs": {
-    "url": "https://github.com/dezudas/gaida/issues"
+    "url": "https://github.com/dezudas/gaida/issues",
+    "email": "dezudas@gmail.com"
   },
   "directories": {
     "doc": "docs",
