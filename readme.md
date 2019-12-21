@@ -5,7 +5,7 @@ A CSS framework targeted to modern application with modular structure, where UI 
 
 Grid update [Superclean, powerful, responsive, Sass-based, BEM-syntax CSS grid system]
 
-> A minimalist CSS framework, forked from Milligram to make it more robust CSS framework to support challenges. 
+> A minimalist CSS framework, initially forked from Milligram to make it more robust CSS framework to support challenges and new updates in CSS library.
 
 ## Status
 
@@ -46,7 +46,7 @@ https://cdn.jsdelivr.net/npm/gaida@1.0.5/dist/gaida.min.css
 
 ## Contributing
 
-Want to contribute? 
+Want to contribute and support our effort?
 
 ## License
 
