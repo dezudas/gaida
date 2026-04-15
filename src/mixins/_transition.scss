@@ -1,0 +1,59 @@
+// =============================================================================
+// mixins/_transition.scss
+// Transition shorthand mixin — ensures consistent easing and duration across
+// all interactive elements without repeating values everywhere.
+//
+// Public API:
+//   transition($properties, $duration, $easing, $delay)
+//     $properties : CSS property name(s), comma-separated string (default: "all")
+//     $duration   : transition time (default: $transition-duration)
+//     $easing     : timing function (default: $transition-easing)
+//     $delay      : optional delay (default: 0s)
+//
+// Usage:
+//   .btn { @include transition(background-color color); }
+//   .card { @include transition(transform box-shadow, 300ms, ease-out); }
+// =============================================================================
+
+@use "sass:list";
+@use "sass:string";
+
+// ---------------------------------------------------------------------------
+// Default transition tokens (can be overridden before @use)
+// ---------------------------------------------------------------------------
+
+/// @public
+$transition-duration: 200ms !default;
+
+/// @public
+$transition-easing:   ease !default;
+
+/// @mixin transition
+/// @param {List}   $properties - Space-separated property names
+/// @param {Time}   $duration   - Override duration
+/// @param {String} $easing     - Override easing
+/// @param {Time}   $delay      - Optional delay
+@mixin transition($properties: all, $duration: $transition-duration, $easing: $transition-easing, $delay: 0s) {
+  $transitions: ();
+
+  @if $properties == all {
+    $transitions: (all $duration $easing $delay);
+  } @else {
+    @each $prop in $properties {
+      $transitions: list.append($transitions, ($prop $duration $easing $delay), comma);
+    }
+  }
+
+  transition: $transitions;
+}
+
+// ---------------------------------------------------------------------------
+// Focus ring mixin — accessible keyboard focus indicator
+// ---------------------------------------------------------------------------
+
+/// @mixin focus-ring
+/// Emits a visually distinct focus outline that respects user preferences.
+@mixin focus-ring($color: var(--gd-color-primary), $offset: 0.2rem) {
+  outline: 0.2rem solid $color;
+  outline-offset: $offset;
+}

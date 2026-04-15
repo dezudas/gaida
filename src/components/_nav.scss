@@ -1,0 +1,174 @@
+@use "../tokens" as *;
+@use "../mixins" as *;
+
+// =============================================================================
+// components/_nav.scss
+// Navigation shell — top navbar, brand, links, hamburger toggle.
+//
+// Classes:
+//   .nav               — navbar container
+//   .nav-brand         — logo / site name
+//   .nav-links         — horizontal link list
+//   .nav-link          — individual nav item
+//   .nav-link.active   — current-page indicator
+//   .nav-toggle        — hamburger (mobile)
+//   .nav-open          — open state (JS toggles this on .nav)
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Navbar shell
+// ---------------------------------------------------------------------------
+
+.nav {
+  background-color: var(--gd-color-bg);
+  border-bottom: 0.1rem solid var(--gd-color-border);
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+
+  @include transition(box-shadow, 200ms);
+
+  // Elevated state — add shadow when page scrolls beneath
+  &.is-elevated {
+    box-shadow: $shadow-md;
+  }
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  gap: $space-6;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: map-get($breakpoints, "xl") + ($layout-spacing * 2);
+  padding: $space-3 $layout-spacing;
+}
+
+// ---------------------------------------------------------------------------
+// Brand
+// ---------------------------------------------------------------------------
+
+.nav-brand {
+  color: var(--gd-color-text);
+  font-size: $font-size-lg;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &:hover,
+  &:focus {
+    color: var(--gd-color-primary);
+    text-decoration: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Links — push to right by default via margin-left: auto on the list
+// ---------------------------------------------------------------------------
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  list-style: none;
+  margin: 0 0 0 auto;
+  padding: 0;
+}
+
+.nav-link {
+  border-radius: $radius-md;
+  color: var(--gd-color-text-muted);
+  font-size: $font-size-sm;
+  font-weight: 600;
+  padding: $space-2 $space-3;
+  text-decoration: none;
+  white-space: nowrap;
+
+  @include transition(color background-color, 150ms);
+
+  &:hover,
+  &:focus {
+    color: var(--gd-color-text);
+    background-color: var(--gd-color-surface);
+    text-decoration: none;
+  }
+
+  // Active / current page
+  &.active,
+  &[aria-current="page"] {
+    color: var(--gd-color-primary);
+    background-color: var(--gd-color-primary-light);
+    font-weight: 700;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Hamburger toggle — mobile only (hidden by default on large screens)
+// ---------------------------------------------------------------------------
+
+.nav-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;         // shown via respond-to below
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: $space-2;
+  text-transform: none;
+  letter-spacing: normal;
+
+  &:focus-visible {
+    @include focus-ring(var(--gd-color-primary));
+  }
+
+  span {
+    background-color: var(--gd-color-text);
+    border-radius: $radius-full;
+    display: block;
+    height: 0.2rem;
+    width: 2.4rem;
+    @include transition(transform opacity, 200ms);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Responsive collapse — below "md" breakpoint
+// ---------------------------------------------------------------------------
+
+@include respond-to("md") {
+  .nav-toggle {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    margin: 0;
+    padding: $space-3 0 $space-4;
+    width: 100%;
+    border-top: 0.1rem solid var(--gd-color-border);
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: $space-3 $space-4;
+  }
+
+  // .nav-open toggled by JS
+  .nav-open {
+    .nav-links { display: flex; }
+
+    // Animate hamburger to X
+    .nav-toggle span:nth-child(1) { transform: translateY(0.7rem) rotate(45deg); }
+    .nav-toggle span:nth-child(2) { opacity: 0; }
+    .nav-toggle span:nth-child(3) { transform: translateY(-0.7rem) rotate(-45deg); }
+  }
+
+  .nav-inner {
+    flex-wrap: wrap;
+  }
+}

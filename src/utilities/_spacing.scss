@@ -1,0 +1,51 @@
+@use "../tokens" as *;
+
+// =============================================================================
+// utilities/_spacing.scss
+// Margin and padding utility classes generated from the $spacing-map token.
+//
+// Pattern: .{property}{direction}-{size}
+//   Property:  m (margin), p (padding)
+//   Direction: t (top), r (right), b (bottom), l (left), x (horizontal), y (vertical)
+//   Size:      0, 1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, auto
+//
+// Example:
+//   .mt-4  -> margin-top: var(--gd-space-4)
+//   .px-2  -> padding-left: var(--gd-space-2), padding-right: var(--gd-space-2)
+//   .m-auto -> margin: auto
+// =============================================================================
+
+// Base classes for auto margin
+.m-auto  { margin: auto !important; }
+.mt-auto { margin-top: auto !important; }
+.mb-auto { margin-bottom: auto !important; }
+.ml-auto { margin-left: auto !important; }
+.mr-auto { margin-right: auto !important; }
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+.my-auto { margin-top: auto !important; margin-bottom: auto !important; }
+
+@each $key, $value in $spacing-map {
+  // We use CSS custom properties for values where available, or fallback to raw scss value
+  $var-name: if($key == "0", "0", "var(--gd-space-#{$key}, #{$value})");
+
+  // Margin
+  .m-#{$key}  { margin: #{$var-name} !important; }
+  .mt-#{$key} { margin-top: #{$var-name} !important; }
+  .mr-#{$key} { margin-right: #{$var-name} !important; }
+  .mb-#{$key} { margin-bottom: #{$var-name} !important; }
+  .ml-#{$key} { margin-left: #{$var-name} !important; }
+  .mx-#{$key} { margin-left: #{$var-name} !important; margin-right: #{$var-name} !important; }
+  .my-#{$key} { margin-top: #{$var-name} !important; margin-bottom: #{$var-name} !important; }
+
+  // Padding
+  .p-#{$key}  { padding: #{$var-name} !important; }
+  .pt-#{$key} { padding-top: #{$var-name} !important; }
+  .pr-#{$key} { padding-right: #{$var-name} !important; }
+  .pb-#{$key} { padding-bottom: #{$var-name} !important; }
+  .pl-#{$key} { padding-left: #{$var-name} !important; }
+  .px-#{$key} { padding-left: #{$var-name} !important; padding-right: #{$var-name} !important; }
+  .py-#{$key} { padding-top: #{$var-name} !important; padding-bottom: #{$var-name} !important; }
+
+  // Gap (for flex/grid)
+  .gap-#{$key}  { gap: #{$var-name} !important; }
+}

@@ -1,0 +1,9 @@
+// =============================================================================
+// utilities/_index.scss
+// Barrel file — forward all utility partials.
+// Utilities should always be parsed last so they can override components.
+// =============================================================================
+
+@forward "spacing";
+@forward "display";
+@forward "colors";

@@ -1,0 +1,12 @@
+// =============================================================================
+// components/_index.scss
+// Barrel file — forward all component partials.
+// Order: button → form → card → nav → table → badge
+// =============================================================================
+
+@forward "button";
+@forward "form";
+@forward "card";
+@forward "nav";
+@forward "table";
+@forward "badge";

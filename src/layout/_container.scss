@@ -1,0 +1,47 @@
+@use "../tokens" as *;
+@use "../mixins" as *;
+
+// =============================================================================
+// layout/_container.scss
+// Standalone container helpers — stack / section / prose wrappers.
+// The core .container class lives in layout/_grid.scss.
+//
+// Classes:
+//   .section           — full-width section with vertical padding
+//   .prose             — readable line-length cap (65ch)
+//   .clearfix          — legacy float clearfix (backward compat)
+//   .float-left        — float helper
+//   .float-right       — float helper
+// =============================================================================
+
+/// .section — vertical breathing room for page sections
+.section {
+  padding-top: $space-16;
+  padding-bottom: $space-16;
+
+  @include respond-to("md") {
+    padding-top: $space-12;
+    padding-bottom: $space-12;
+  }
+}
+
+/// .prose — constrains line-length for long-form reading comfort
+.prose {
+  max-width: 65ch;
+}
+
+// ---------------------------------------------------------------------------
+// Legacy float helpers (kept for backward compat)
+// ---------------------------------------------------------------------------
+
+/// @deprecated Use flexbox/grid. Kept for backward compatibility.
+.clearfix {
+  &::after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+}
+
+.float-left  { float: left; }
+.float-right { float: right; }

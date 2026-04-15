@@ -1,0 +1,60 @@
+@use "../tokens" as *;
+
+// =============================================================================
+// mixins/_fluid-type.scss
+// Fluid typography mixin — scales font-size between two viewport widths
+// using CSS clamp() so type is perfectly sized at any screen width.
+//
+// Depends on: mixins/_functions.scss (rem, strip-unit)
+//             tokens/_breakpoints.scss ($breakpoints)
+//
+// Public API:
+//   fluid-type($min-size, $max-size, $min-bp, $max-bp)
+//     $min-size : smallest font-size in rem   (e.g. 1.6rem)
+//     $max-size : largest  font-size in rem   (e.g. 2.4rem)
+//     $min-bp   : breakpoint name at low end  (e.g. "sm") OR raw px value
+//     $max-bp   : breakpoint name at high end (e.g. "xl") OR raw px value
+//
+// Usage:
+//   h1 { @include fluid-type(2.4rem, 4.8rem, "sm", "xl"); }
+// =============================================================================
+
+@use "sass:math";
+@use "sass:map";
+@use "sass:meta";
+
+/// @mixin fluid-type
+/// Emits a CSS clamp() declaration on `font-size`.
+@mixin fluid-type($min-size, $max-size, $min-bp: "sm", $max-bp: "xl") {
+  // Resolve named breakpoints to px values
+  $min-width: if(
+    meta.type-of($min-bp) == string,
+    map.get($breakpoints, $min-bp),
+    $min-bp
+  );
+  $max-width: if(
+    meta.type-of($max-bp) == string,
+    map.get($breakpoints, $max-bp),
+    $max-bp
+  );
+
+  @if not $min-width or not $max-width {
+    @warn "fluid-type(): could not resolve breakpoints '#{$min-bp}' or '#{$max-bp}'.";
+  } @else {
+    // Convert to unitless numbers for slope calculation (px base)
+    $min-px: strip-unit($min-size) * 10;    // rem → px (10px root)
+    $max-px: strip-unit($max-size) * 10;
+    $min-vw: strip-unit($min-width);
+    $max-vw: strip-unit($max-width);
+
+    $slope: math.div($max-px - $min-px, $max-vw - $min-vw);
+    $intercept: $min-px - $slope * $min-vw;
+
+    // CSS clamp: min | preferred (slope * 100vw + intercept) | max
+    font-size: clamp(
+      #{$min-size},
+      #{$slope * 100}vw + #{rem($intercept)},
+      #{$max-size}
+    );
+  }
+}

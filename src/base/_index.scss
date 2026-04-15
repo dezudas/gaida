@@ -1,0 +1,8 @@
+// =============================================================================
+// base/_index.scss
+// Barrel file for the base layer.
+// Import order: reset first, then typography on top.
+// =============================================================================
+
+@forward "reset";
+@forward "typography";

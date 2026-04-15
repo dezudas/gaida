@@ -1,0 +1,152 @@
+@use "../tokens" as *;
+@use "../mixins" as *;
+
+// =============================================================================
+// layout/_grid.scss
+// 12-column CSS Grid system + flexbox row/column helpers.
+//
+// Depends on: tokens/_spacing.scss, tokens/_breakpoints.scss,
+//             mixins/_respond-to.scss
+//
+// Classes:
+//   .container[.grid-{xs|sm|md|lg|xl}]  — centered, max-width wrapper
+//   .grid                               — CSS Grid 12-col row
+//   .col-{1..12}                        — column span
+//   .col-{bp}-{1..12}                   — responsive span (max-width breakpoint)
+//   .col-auto .col-ml-auto .col-mr-auto — auto-width helpers
+//   .row .row-col                       — flexbox helpers
+//   .col-gapless .col-oneline           — grid modifiers
+//   .hide-{bp} .show-{bp}              — responsive visibility
+// =============================================================================
+
+@use "sass:math";
+@use "sass:map";
+
+// ---------------------------------------------------------------------------
+// Container
+// ---------------------------------------------------------------------------
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $layout-spacing;
+  padding-right: $layout-spacing;
+  width: 100%;
+
+  // Named max-width variants
+  &.grid-xl  { max-width: map.get($breakpoints, "xl")  + ($layout-spacing * 2); }
+  &.grid-lg  { max-width: map.get($breakpoints, "lg")  + ($layout-spacing * 2); }
+  &.grid-md  { max-width: map.get($breakpoints, "md")  + ($layout-spacing * 2); }
+  &.grid-sm  { max-width: map.get($breakpoints, "sm")  + ($layout-spacing * 2); }
+  &.grid-xs  { max-width: map.get($breakpoints, "xs")  + ($layout-spacing * 2); }
+}
+
+// ---------------------------------------------------------------------------
+// 12-column CSS Grid row
+// ---------------------------------------------------------------------------
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: $layout-spacing;
+
+  // Gapless variant
+  &.col-gapless {
+    gap: 0;
+  }
+
+  // Single-line (no wrapping, horizontal scroll)
+  &.col-oneline {
+    grid-auto-flow: column;
+    overflow-x: auto;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Column spans (base — no breakpoint prefix)
+// Each class sets grid-column to span N of 12.
+// ---------------------------------------------------------------------------
+
+$grid-cols: 12;
+
+@for $i from 1 through $grid-cols {
+  .col-#{$i} {
+    grid-column: span $i;
+  }
+}
+
+.col-auto {
+  grid-column: auto;
+  width: auto;
+}
+
+.col-ml-auto { margin-left: auto; }
+.col-mr-auto { margin-right: auto; }
+.col-mx-auto { margin-left: auto; margin-right: auto; }
+
+// ---------------------------------------------------------------------------
+// Responsive column spans — generated for every named breakpoint
+// Convention: .col-{bp}-{n} applies AT max-width of that breakpoint
+// ---------------------------------------------------------------------------
+
+@each $bp, $value in $breakpoints {
+  @media screen and (max-width: $value) {
+    @for $i from 1 through $grid-cols {
+      .col-#{$bp}-#{$i} {
+        grid-column: span $i;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Visibility helpers — generated per breakpoint
+// ---------------------------------------------------------------------------
+
+// Default: all show-* helpers are hidden
+$bp-names: map.keys($breakpoints);
+
+@each $bp in $bp-names {
+  .show-#{$bp} { display: none !important; }
+}
+
+@each $bp, $value in $breakpoints {
+  @media screen and (max-width: $value) {
+    .hide-#{$bp} { display: none !important; }
+    .show-#{$bp} { display: revert !important; }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Flexbox helpers
+// ---------------------------------------------------------------------------
+
+/// .row — horizontal flex container (wraps by default)
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $layout-spacing;
+}
+
+/// .row-col — vertical flex container
+.row-col {
+  display: flex;
+  flex-direction: column;
+  gap: $layout-spacing;
+}
+
+// Flex alignment utilities
+.flex-center        { justify-content: center; align-items: center; }
+.justify-start      { justify-content: flex-start; }
+.justify-center     { justify-content: center; }
+.justify-end        { justify-content: flex-end; }
+.justify-between    { justify-content: space-between; }
+.justify-around     { justify-content: space-around; }
+.align-start        { align-items: flex-start; }
+.align-center       { align-items: center; }
+.align-end          { align-items: flex-end; }
+.align-stretch      { align-items: stretch; }
+.flex-1             { flex: 1; }
+.flex-none          { flex: none; }
+.flex-wrap          { flex-wrap: wrap; }
+.flex-nowrap        { flex-wrap: nowrap; }

@@ -1,0 +1,179 @@
+@use "../tokens" as *;
+@use "../mixins" as *;
+
+// =============================================================================
+// components/_form.scss
+// Form component — inputs, select, textarea, labels, and validation states.
+// All values reference token variables. No hardcoded hex colors.
+//
+// Classes:
+//   Input types: email, number, password, search, tel, text, url, textarea, select
+//   .form-group       — label + input wrapper with bottom spacing
+//   .form-inline      — horizontal label/input pair
+//   .label-inline     — inline label next to checkbox/radio
+//   .form-hint        — descriptive hint text below input
+//   .is-valid         — success validation state
+//   .is-invalid       — error validation state
+//   .form-error       — error message text
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Text inputs, select, textarea
+// ---------------------------------------------------------------------------
+
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="url"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+  appearance: none;
+  background-color: var(--gd-color-bg);
+  border: 0.1rem solid var(--gd-color-border);
+  border-radius: $radius-md;
+  box-shadow: none;
+  box-sizing: inherit;
+  color: var(--gd-color-text);
+  display: block;
+  font-family: var(--gd-font-sans);
+  font-size: $font-size-base;
+  height: 4.0rem;
+  padding: $space-2 $space-3;
+  width: 100%;
+
+  @include transition(border-color box-shadow, 150ms);
+
+  &::placeholder {
+    color: var(--gd-color-text-muted);
+    opacity: 1; // Firefox fix
+  }
+
+  &:focus {
+    border-color: var(--gd-color-primary);
+    box-shadow: 0 0 0 0.3rem rgba($gd-blue-500, 0.15);
+    outline: 0;
+  }
+
+  // Validation states
+  &.is-valid {
+    border-color: var(--gd-color-success);
+    &:focus { box-shadow: 0 0 0 0.3rem rgba($gd-green-500, 0.15); }
+  }
+
+  &.is-invalid {
+    border-color: var(--gd-color-danger);
+    &:focus { box-shadow: 0 0 0 0.3rem rgba($gd-red-500, 0.15); }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Select — custom arrow
+// ---------------------------------------------------------------------------
+
+select {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%236c757d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>');
+  background-position: right $space-3 center;
+  background-repeat: no-repeat;
+  background-size: 1.6rem;
+  cursor: pointer;
+  padding-right: $space-10;
+}
+
+// ---------------------------------------------------------------------------
+// Textarea
+// ---------------------------------------------------------------------------
+
+textarea {
+  height: auto;
+  min-height: 10rem;
+  resize: vertical;
+}
+
+// ---------------------------------------------------------------------------
+// Checkbox & Radio
+// ---------------------------------------------------------------------------
+
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  accent-color: var(--gd-color-primary);
+}
+
+// ---------------------------------------------------------------------------
+// Labels
+// ---------------------------------------------------------------------------
+
+label,
+legend {
+  display: block;
+  color: var(--gd-color-text);
+  font-size: $font-size-base;
+  font-weight: 700;
+  margin-bottom: $space-1;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+// ---------------------------------------------------------------------------
+// Form layout helpers
+// ---------------------------------------------------------------------------
+
+/// .form-group — vertical stack of label + control + hint
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $space-6;
+
+  > label { margin-bottom: $space-1; }
+}
+
+/// .form-inline — single line label and control
+.form-inline {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  label { margin-bottom: 0; white-space: nowrap; }
+}
+
+/// .label-inline — for checkbox/radio labels
+.label-inline {
+  display: inline-flex;
+  align-items: center;
+  font-weight: normal;
+  gap: $space-2;
+  cursor: pointer;
+  margin-bottom: 0;
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    margin-bottom: 0;
+  }
+}
+
+/// .form-hint — descriptive text below a control
+.form-hint {
+  color: var(--gd-color-text-muted);
+  font-size: $font-size-sm;
+  margin-top: $space-1;
+}
+
+/// .form-error — validation error message
+.form-error {
+  color: var(--gd-color-danger);
+  font-size: $font-size-sm;
+  font-weight: 600;
+  margin-top: $space-1;
+}

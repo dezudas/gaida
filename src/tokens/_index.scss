@@ -1,0 +1,11 @@
+// =============================================================================
+// tokens/_index.scss
+// Barrel file — @forward all token partials so consumers can do:
+//   @use 'tokens' as t;
+// and access t.$color-primary, t.$space-4, etc.
+// =============================================================================
+
+@forward "color";
+@forward "typography";
+@forward "spacing";
+@forward "breakpoints";

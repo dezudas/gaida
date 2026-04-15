@@ -1,0 +1,226 @@
+@use "../tokens" as *;
+@use "../mixins" as *;
+
+// =============================================================================
+// components/_button.scss
+// Button component — variants, sizes, and states.
+// All color values reference CSS custom properties or SCSS tokens only.
+// No hardcoded hex values in this file.
+//
+// Classes:
+//   .btn               — base button
+//   .btn-primary       — solid brand fill (default)
+//   .btn-secondary     — secondary neutral fill
+//   .btn-outline       — bordered, transparent fill
+//   .btn-clear         — ghost / text-only
+//   .btn-danger        — destructive action
+//   .btn-sm .btn-lg    — size modifiers
+//   [disabled]         — disabled state
+//
+// Semantic HTML:
+//   <button>, input[type="button|submit|reset"] are also styled via element
+//   selectors to work with no-class markup.
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Button base — shared across all variants
+// ---------------------------------------------------------------------------
+
+%btn-base {
+  appearance: none;
+  border-radius: $radius-md;
+  border: 0.1rem solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  font-family: var(--gd-font-sans);
+  font-size: $font-size-sm;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  padding: $space-3 $space-6;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+  vertical-align: middle;
+
+  @include transition(background-color border-color color box-shadow, 160ms);
+
+  // Focus ring — accessible keyboard navigation
+  &:focus-visible {
+    @include focus-ring(var(--gd-color-primary));
+    outline-offset: 0.3rem;
+  }
+
+  // Disabled state
+  &:disabled,
+  &[disabled],
+  &[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Semantic element baseline (no-class variant)
+// ---------------------------------------------------------------------------
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  @extend %btn-base;
+  background-color: var(--gd-color-primary);
+  border-color: var(--gd-color-primary);
+  color: $color-initial;
+
+  &:hover,
+  &:focus {
+    background-color: var(--gd-color-primary-dark);
+    border-color: var(--gd-color-primary-dark);
+    color: $color-initial;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// .btn — explicit class base (overrides element selector above)
+// ---------------------------------------------------------------------------
+
+.btn {
+  @extend %btn-base;
+}
+
+// ---------------------------------------------------------------------------
+// Variants — color only, everything else from %btn-base
+// ---------------------------------------------------------------------------
+
+/// Default: primary solid
+.btn,
+.btn-primary {
+  background-color: var(--gd-color-primary);
+  border-color: var(--gd-color-primary);
+  color: var(--gd-color-text-inverse);
+
+  &:hover,
+  &:focus {
+    background-color: var(--gd-color-primary-dark);
+    border-color: var(--gd-color-primary-dark);
+    color: var(--gd-color-text-inverse);
+    text-decoration: none;
+  }
+
+  &:disabled,
+  &[disabled] {
+    &:hover { background-color: var(--gd-color-primary); }
+  }
+}
+
+/// Secondary — neutral fill
+.btn-secondary {
+  background-color: var(--gd-color-secondary);
+  border-color: var(--gd-color-secondary);
+  color: var(--gd-color-text-inverse);
+
+  &:hover,
+  &:focus {
+    background-color: $gd-gray-600;
+    border-color: $gd-gray-600;
+    color: var(--gd-color-text-inverse);
+    text-decoration: none;
+  }
+}
+
+/// Outline — bordered, transparent background
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--gd-color-primary);
+  color: var(--gd-color-primary);
+
+  &:hover,
+  &:focus {
+    background-color: var(--gd-color-primary);
+    color: var(--gd-color-text-inverse);
+    text-decoration: none;
+  }
+
+  &:disabled,
+  &[disabled] {
+    &:hover {
+      background-color: transparent;
+      color: var(--gd-color-primary);
+    }
+  }
+}
+
+/// Clear / Ghost — no border, no background
+.btn-clear {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--gd-color-primary);
+
+  &:hover,
+  &:focus {
+    background-color: var(--gd-color-primary-light);
+    color: var(--gd-color-primary-dark);
+    text-decoration: none;
+  }
+
+  &:disabled,
+  &[disabled] {
+    &:hover { background-color: transparent; }
+  }
+}
+
+/// Danger — destructive CTA
+.btn-danger {
+  background-color: var(--gd-color-danger);
+  border-color: var(--gd-color-danger);
+  color: var(--gd-color-text-inverse);
+
+  &:hover,
+  &:focus {
+    background-color: darken($gd-red-500, 8%);
+    border-color: darken($gd-red-500, 8%);
+    color: var(--gd-color-text-inverse);
+    text-decoration: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Size modifiers
+// ---------------------------------------------------------------------------
+
+.btn-sm {
+  font-size: 1.1rem;
+  padding: $space-1 $space-3;
+}
+
+.btn-lg {
+  font-size: $font-size-lg;
+  padding: $space-4 $space-8;
+}
+
+// Full-width block button
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+// Icon-only square button
+.btn-icon {
+  padding: $space-3;
+  aspect-ratio: 1;
+}
+
+// ---------------------------------------------------------------------------
+// Backward compat aliases (old .button, .button-outline, .button-clear)
+// ---------------------------------------------------------------------------
+
+.button        { @extend .btn; @extend .btn-primary; }
+.button-outline { @extend .btn-outline; }
+.button-clear   { @extend .btn-clear; }

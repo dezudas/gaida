@@ -1,0 +1,154 @@
+// =============================================================================
+// base/_reset.scss
+// Minimal modern reset — strips only what we actually need to override.
+// No normalize.css in full; just the targeted fixes for consistent baselines.
+//
+// Principles:
+//   - box-sizing: border-box everywhere via inheritance (not * directly)
+//   - margin/padding stripped on block elements
+//   - font inheritance for form controls
+//   - media elements are block and responsive by default
+//   - No opinionated list styles here — those live in base/_typography.scss
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Box model
+// ---------------------------------------------------------------------------
+
+// html sets the root; children inherit so overriding locally still works.
+html {
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%; // Prevent font scaling on orientation change (iOS)
+
+  // 62.5% trick: 1rem = 10px → intuitive rem math (1.6rem = 16px)
+  font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+// ---------------------------------------------------------------------------
+// Spacing reset on common block elements
+// ---------------------------------------------------------------------------
+
+body,
+h1, h2, h3, h4, h5, h6,
+p,
+figure,
+blockquote,
+dl, dd,
+ol, ul {
+  margin: 0;
+  padding: 0;
+}
+
+// ---------------------------------------------------------------------------
+// Document body defaults
+// ---------------------------------------------------------------------------
+
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // Pulls from CSS custom properties (theming-safe)
+  background-color: var(--gd-color-bg);
+  color: var(--gd-color-text);
+  font-family: var(--gd-font-sans);
+  font-size: var(--gd-font-size-base);
+  line-height: var(--gd-line-height);
+}
+
+// ---------------------------------------------------------------------------
+// Media elements — block + responsive by default
+// ---------------------------------------------------------------------------
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// ---------------------------------------------------------------------------
+// Form controls — inherit font stack (browsers default to system font)
+// ---------------------------------------------------------------------------
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+// ---------------------------------------------------------------------------
+// Avoid text overflow on long words
+// ---------------------------------------------------------------------------
+
+p,
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+// ---------------------------------------------------------------------------
+// Anchor default — remove text-decoration, add accessible underline on hover
+// ---------------------------------------------------------------------------
+
+a {
+  color: var(--gd-color-primary);
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: var(--gd-color-primary-dark);
+    text-decoration: underline;
+  }
+
+  // Visible focus ring for keyboard navigation
+  &:focus-visible {
+    outline: 0.2rem solid var(--gd-color-primary);
+    outline-offset: 0.2rem;
+    text-decoration: none;
+    border-radius: 0.2rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Horizontal rule
+// ---------------------------------------------------------------------------
+
+hr {
+  border: none;
+  border-top: 0.1rem solid var(--gd-color-border);
+  margin: 0;
+}
+
+// ---------------------------------------------------------------------------
+// Tables — sensible baseline
+// ---------------------------------------------------------------------------
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+// ---------------------------------------------------------------------------
+// Reduced-motion — always respect the user's preference
+// ---------------------------------------------------------------------------
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

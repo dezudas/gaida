@@ -1,0 +1,124 @@
+// =============================================================================
+// tokens/_color.scss
+// Color design tokens — single source of truth for all color values.
+// Exposes both SCSS variables (for Sass-side logic) and CSS custom properties
+// on :root (for runtime theming and dark-mode switching).
+//
+// Public API (overridable before @use):
+//   None — override via [data-theme] or prefers-color-scheme in themes/_dark.scss
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Raw palette — primitive color values. Do not use directly in components.
+// These only exist to feed semantic tokens below.
+// ---------------------------------------------------------------------------
+
+// White / Black
+$gd-white:    #ffffff !default;
+$gd-black:    #0d0d0d !default;
+
+// Brand blues
+$gd-blue-100: #e8eef8 !default;
+$gd-blue-200: #c2d1ee !default;
+$gd-blue-300: #8aaad9 !default;
+$gd-blue-400: #4d7fc4 !default;
+$gd-blue-500: #003893 !default;  // primary brand
+$gd-blue-600: #002d77 !default;
+$gd-blue-700: #00205a !default;
+
+// Neutrals (gray scale, 50–900)
+$gd-gray-50:  #f8f9fa !default;
+$gd-gray-100: #e9ecef !default;
+$gd-gray-200: #dee2e6 !default;
+$gd-gray-300: #ced4da !default;
+$gd-gray-400: #adb5bd !default;
+$gd-gray-500: #6c757d !default;
+$gd-gray-600: #495057 !default;
+$gd-gray-700: #343a40 !default;
+$gd-gray-800: #212529 !default;
+$gd-gray-900: #121417 !default;
+
+// Accent
+$gd-teal-300: #5dc8c8 !default;
+$gd-teal-500: #1a9e9e !default;
+
+// Status
+$gd-green-500:  #2d9e5f !default;
+$gd-yellow-500: #d4ac0d !default;
+$gd-red-500:    #c0392b !default;
+
+// ---------------------------------------------------------------------------
+// Semantic tokens — light mode defaults (mapped to raw palette above).
+// These are the only variables components should reference.
+// ---------------------------------------------------------------------------
+
+/// @public Override these to retheme the framework.
+$color-bg:           $gd-white          !default;
+$color-surface:      $gd-gray-50        !default;
+$color-border:       $gd-gray-300       !default;
+
+$color-text:         $gd-gray-800       !default;
+$color-text-muted:   $gd-gray-500       !default;
+$color-text-inverse: $gd-white          !default;
+
+$color-primary:      $gd-blue-500       !default;
+$color-primary-dark: $gd-blue-600       !default;
+$color-primary-light:$gd-blue-100       !default;
+
+$color-secondary:    $gd-gray-500       !default;
+$color-accent:       $gd-teal-500       !default;
+
+$color-success:      $gd-green-500      !default;
+$color-warning:      $gd-yellow-500     !default;
+$color-danger:       $gd-red-500        !default;
+
+// Legacy aliases — kept for backward compat with existing partials
+$color-initial:    $gd-white            !default;
+$color-tertiary:   $gd-gray-50          !default;
+$color-quaternary: $gd-gray-300         !default;
+$color-quinary:    $gd-gray-200         !default;
+
+// Gray shorthand scale (backward compat)
+$gray-10: $gd-gray-50  !default;
+$gray-20: $gd-gray-100 !default;
+$gray-30: $gd-gray-200 !default;
+$gray-40: $gd-gray-300 !default;
+$gray-50: $gd-gray-400 !default;
+$gray-60: $gd-gray-500 !default;
+$gray-70: $gd-gray-600 !default;
+$gray-80: $gd-gray-700 !default;
+$gray-90: $gd-gray-800 !default;
+
+// Table colors (backward compat)
+$tbl-row-hover-bgcolor:  #f2fbfb !default;
+$tbl-row-active-bgcolor: #e5f6f7 !default;
+$tbl-striped-bg:         rgba(0, 0, 0, 0.04) !default;
+
+// ---------------------------------------------------------------------------
+// CSS custom properties — exposed on :root for runtime theming.
+// Dark-mode overrides live in themes/_dark.scss.
+// ---------------------------------------------------------------------------
+
+:root {
+  // Background & surface
+  --gd-color-bg:           #{$color-bg};
+  --gd-color-surface:      #{$color-surface};
+  --gd-color-border:       #{$color-border};
+
+  // Text
+  --gd-color-text:         #{$color-text};
+  --gd-color-text-muted:   #{$color-text-muted};
+  --gd-color-text-inverse: #{$color-text-inverse};
+
+  // Brand
+  --gd-color-primary:      #{$color-primary};
+  --gd-color-primary-dark: #{$color-primary-dark};
+  --gd-color-primary-light:#{$color-primary-light};
+  --gd-color-secondary:    #{$color-secondary};
+  --gd-color-accent:       #{$color-accent};
+
+  // Status
+  --gd-color-success: #{$color-success};
+  --gd-color-warning: #{$color-warning};
+  --gd-color-danger:  #{$color-danger};
+}

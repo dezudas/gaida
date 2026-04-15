@@ -1,0 +1,16 @@
+// =============================================================================
+// utilities/_colors.scss
+// Background and text color utilities generated from tokens.
+// =============================================================================
+
+// Backgrounds
+.bg-primary   { background-color: var(--gd-color-primary) !important; }
+.bg-secondary { background-color: var(--gd-color-secondary) !important; }
+.bg-success   { background-color: var(--gd-color-success) !important; }
+.bg-warning   { background-color: var(--gd-color-warning) !important; }
+.bg-danger    { background-color: var(--gd-color-danger) !important; }
+.bg-surface   { background-color: var(--gd-color-surface) !important; }
+.bg-transparent { background-color: transparent !important; }
+
+// Text colors are already defined in base/_typography.scss but we can add inverse
+.text-inverse { color: var(--gd-color-text-inverse) !important; }

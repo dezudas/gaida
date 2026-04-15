@@ -1,0 +1,62 @@
+@use "../tokens" as *;
+
+// =============================================================================
+// mixins/_respond-to.scss
+// Responsive breakpoint mixin — always use named breakpoints, never raw px.
+//
+// Depends on: tokens/_breakpoints.scss  ($breakpoints map)
+//
+// Public API:
+//   respond-to($bp, $direction: "max")  — emit a media query
+//     $bp        : breakpoint name ("xs" | "sm" | "md" | "lg" | "xl" | "2xl")
+//     $direction : "max" (mobile-first clamp) | "min" (upward) | "only"
+//
+// Usage:
+//   @include respond-to("md") { ... }         // max-width: 840px
+//   @include respond-to("md", "min") { ... }  // min-width: 840px
+//   @include respond-to("md", "only") { ... } // 840px .. 960px
+// =============================================================================
+
+@use "sass:map";
+
+// The $breakpoints map must be available via the token layer loaded before this.
+// We reference it via the global scope (tokens import happens in main.scss first).
+
+/// @mixin respond-to
+/// @param {String} $bp        - Named breakpoint key from $breakpoints map
+/// @param {String} $direction - "max" | "min" | "only" (default: "max")
+@mixin respond-to($bp, $direction: "max") {
+  @if not map.has-key($breakpoints, $bp) {
+    @warn "respond-to(): Unknown breakpoint `#{$bp}`. Available: #{map.keys($breakpoints)}.";
+  } @else {
+    $value: map.get($breakpoints, $bp);
+
+    @if $direction == "max" {
+      @media screen and (max-width: $value) {
+        @content;
+      }
+    } @else if $direction == "min" {
+      @media screen and (min-width: $value) {
+        @content;
+      }
+    } @else if $direction == "only" {
+      $keys: map.keys($breakpoints);
+      $idx:  index($keys, $bp);
+      $next-key: if($idx < length($keys), nth($keys, $idx + 1), null);
+
+      @if $next-key {
+        $next-value: map.get($breakpoints, $next-key);
+        @media screen and (min-width: $value) and (max-width: ($next-value - 1px)) {
+          @content;
+        }
+      } @else {
+        // Last breakpoint — treat as min-width
+        @media screen and (min-width: $value) {
+          @content;
+        }
+      }
+    } @else {
+      @warn "respond-to(): Unknown direction `#{$direction}`. Use 'max', 'min', or 'only'.";
+    }
+  }
+}

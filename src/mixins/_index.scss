@@ -1,0 +1,11 @@
+// =============================================================================
+// mixins/_index.scss
+// Barrel file — @forward all mixin/function partials.
+//
+// Order matters: functions must come before mixins that call them.
+// =============================================================================
+
+@forward "functions";
+@forward "respond-to";
+@forward "fluid-type";
+@forward "transition";

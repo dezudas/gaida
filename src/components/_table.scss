@@ -1,0 +1,149 @@
+@use "../tokens" as *;
+@use "../mixins" as *;
+
+// =============================================================================
+// components/_table.scss
+// Table component — responsive wrapper, striped, hover, sortable columns.
+// No hardcoded colors — all values from tokens.
+//
+// Config flags (override before @use in main.scss):
+//   $gd-tbl-striped  — enable alternate row shading (default: true)
+//   $gd-tbl-hover    — enable hover row highlight (default: true)
+//
+// Classes:
+//   .table-wrapper    — horizontal scroll container (responsive)
+//   table             — base table styles
+//   thead th.sortable — sortable column header
+//   .nodata           — empty-state message
+// =============================================================================
+
+/// @public
+$gd-tbl-striped: true !default;
+/// @public
+$gd-tbl-hover:   true !default;
+
+// ---------------------------------------------------------------------------
+// Responsive wrapper
+// ---------------------------------------------------------------------------
+
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: $space-6;
+
+  > table { margin-bottom: 0; }
+}
+
+// ---------------------------------------------------------------------------
+// Table base
+// ---------------------------------------------------------------------------
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+
+  @if $gd-tbl-striped {
+    tbody tr:nth-of-type(odd) {
+      background-color: $tbl-striped-bg;
+    }
+  }
+
+  @if $gd-tbl-hover {
+    tbody tr {
+      @include transition(background-color, 120ms);
+
+      &:hover {
+        background-color: $tbl-row-hover-bgcolor;
+      }
+
+      &:active,
+      &.active {
+        background-color: $tbl-row-active-bgcolor;
+      }
+    }
+  }
+
+  // Reset inline inputs inside cells
+  td input { margin-bottom: 0; }
+}
+
+// ---------------------------------------------------------------------------
+// Cells
+// ---------------------------------------------------------------------------
+
+td,
+th {
+  border-bottom: 0.1rem solid var(--gd-color-border);
+  padding: $space-3 $space-4;
+  text-align: left;
+  vertical-align: middle;
+
+  &:first-child { padding-left: 0; }
+  &:last-child  { padding-right: 0; }
+}
+
+// ---------------------------------------------------------------------------
+// Head
+// ---------------------------------------------------------------------------
+
+thead {
+  background-color: var(--gd-color-bg);
+
+  th {
+    border-bottom: 0.2rem solid var(--gd-color-border);
+    color: var(--gd-color-text);
+    font-size: $font-size-sm;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    user-select: none;
+    white-space: nowrap;
+
+    // Sortable column
+    &.sortable {
+      cursor: pointer;
+
+      i,
+      .sort-icon {
+        color: var(--gd-color-text-muted);
+        margin-left: $space-1;
+        @include transition(color, 150ms);
+      }
+
+      &:hover i,
+      &:hover .sort-icon {
+        color: var(--gd-color-text);
+      }
+
+      &.sort-active {
+        color: var(--gd-color-primary);
+
+        i,
+        .sort-icon { color: var(--gd-color-primary); }
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Foot
+// ---------------------------------------------------------------------------
+
+tfoot td {
+  border-top: 0.2rem solid var(--gd-color-border);
+  border-bottom: none;
+  font-weight: 600;
+}
+
+// ---------------------------------------------------------------------------
+// Empty state
+// ---------------------------------------------------------------------------
+
+.nodata {
+  color: var(--gd-color-text-muted);
+  font-size: $font-size-sm;
+  font-weight: 600;
+  padding: $space-8 0;
+  text-align: center;
+}

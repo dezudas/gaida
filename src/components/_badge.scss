@@ -1,0 +1,107 @@
+@use "../tokens" as *;
+
+// =============================================================================
+// components/_badge.scss
+// Badge & Alert components — status indicators and dismissible alerts.
+//
+// Badge classes:
+//   .badge              — inline status pill
+//   .badge-primary | .badge-success | .badge-warning | .badge-danger | .badge-neutral
+//
+// Alert classes:
+//   .alert              — block-level alert container
+//   .alert-success | .alert-warning | .alert-danger | .alert-info
+//   .alert-dismissible  — adds close button spacing
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Badge
+// ---------------------------------------------------------------------------
+
+.badge {
+  border-radius: $radius-full;
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 0.3rem $space-2;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+// Badge color variants — background is a tinted version of the semantic color
+$badge-variants: (
+  "primary": ($gd-blue-100, $gd-blue-600),
+  "success": (rgba($gd-green-500, 0.12), darken($gd-green-500, 10%)),
+  "warning": (rgba($gd-yellow-500, 0.15), darken($gd-yellow-500, 20%)),
+  "danger":  (rgba($gd-red-500, 0.12), darken($gd-red-500, 8%)),
+  "neutral": ($gd-gray-100, $gd-gray-700),
+);
+
+@each $name, $colors in $badge-variants {
+  .badge-#{$name} {
+    background-color: nth($colors, 1);
+    color: nth($colors, 2);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Alert
+// ---------------------------------------------------------------------------
+
+.alert {
+  border-left: 0.4rem solid;
+  border-radius: $radius-md;
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  font-size: $font-size-base;
+  padding: $space-4 $space-5;
+  margin-bottom: $space-6;
+  position: relative;
+
+  > :last-child { margin-bottom: 0; }
+}
+
+// Alert color variants
+$alert-variants: (
+  "info":    ($gd-blue-100,              $gd-blue-600,              $gd-blue-500),
+  "success": (rgba($gd-green-500, 0.1),  darken($gd-green-500, 5%), $gd-green-500),
+  "warning": (rgba($gd-yellow-500, 0.1), darken($gd-yellow-500, 25%), $gd-yellow-500),
+  "danger":  (rgba($gd-red-500, 0.1),    darken($gd-red-500, 5%),   $gd-red-500),
+);
+// (bg, text, border)
+
+@each $name, $colors in $alert-variants {
+  .alert-#{$name} {
+    background-color: nth($colors, 1);
+    color: nth($colors, 2);
+    border-color: nth($colors, 3);
+  }
+}
+
+// Dismissible — reserve space for the close button
+.alert-dismissible {
+  padding-right: $space-12;
+
+  > .alert-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.8rem;
+    line-height: 1;
+    opacity: 0.6;
+    padding: $space-1;
+    position: absolute;
+    right: $space-3;
+    top: $space-3;
+    text-transform: none;
+    letter-spacing: normal;
+
+    &:hover { opacity: 1; }
+  }
+}

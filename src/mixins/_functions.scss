@@ -1,0 +1,59 @@
+// =============================================================================
+// mixins/_functions.scss
+// Pure Sass helper functions — no CSS output until called.
+//
+// Public API:
+//   rem($px)                 — Convert px to rem (assuming 10px html base)
+//   strip-unit($number)      — Remove a unit from a number
+//   map-deep-get($map, $keys…) — Nested map accessor
+// =============================================================================
+
+@use "sass:math";
+@use "sass:map";
+@use "sass:meta";
+
+/// Convert a px value to rem based on the 10px root (62.5% trick).
+/// @param {Number} $px - Value in px (with or without unit)
+/// @return {Number} - Value in rem
+/// @example
+///   font-size: rem(18);   // → 1.8rem
+///   padding:   rem(16px); // → 1.6rem
+@function rem($px) {
+  @if meta.type-of($px) == number and not math.is-unitless($px) {
+    // Strip the px unit before dividing
+    $px: math.div($px, $px * 0 + 1px);
+  }
+  @return math.div($px, 10) * 1rem;
+}
+
+/// Remove the unit from a numeric value.
+/// @param {Number} $number - A number with a unit
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+  @return math.div($number, $number * 0 + 1);
+}
+
+/// Safely retrieve a value from a deeply nested map.
+/// @param {Map}    $map  - Top-level map
+/// @param {String} $keys - Successive key chain
+/// @return {*} - The value, or null if not found
+@function map-deep-get($map, $keys...) {
+  $result: $map;
+  @each $key in $keys {
+    @if meta.type-of($result) == map and map.has-key($result, $key) {
+      $result: map.get($result, $key);
+    } @else {
+      @return null;
+    }
+  }
+  @return $result;
+}
+
+/// Clamp a value between min and max boundaries (native sass version).
+/// @param {Number} $value - Current value
+/// @param {Number} $min   - Minimum boundary
+/// @param {Number} $max   - Maximum boundary
+/// @return {Number}
+@function clamp-value($value, $min, $max) {
+  @return if($value < $min, $min, if($value > $max, $max, $value));
+}

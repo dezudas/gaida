@@ -1,0 +1,37 @@
+// =============================================================================
+// themes/_dark.scss
+// Dark theme overrides via standard CSS custom properties.
+// Activated when user has prefers-color-scheme: dark, OR when [data-theme="dark"]
+// is set on the <html> element (so users can toggle manually).
+// =============================================================================
+
+@mixin dark-theme-variables {
+  // Background & surface
+  --gd-color-bg:           #121417; // $gd-gray-900
+  --gd-color-surface:      #212529; // $gd-gray-800
+  --gd-color-border:       #495057; // $gd-gray-600
+
+  // Text
+  --gd-color-text:         #f8f9fa; // $gd-gray-50
+  --gd-color-text-muted:   #adb5bd; // $gd-gray-400
+  --gd-color-text-inverse: #121417; // Inherit dark body
+
+  // Brand — slightly lightened for contrast against dark bg
+  --gd-color-primary:      #4d7fc4; // $gd-blue-400
+  --gd-color-primary-dark: #8aaad9; // $gd-blue-300
+  --gd-color-primary-light:#002d77; // $gd-blue-600
+
+  --gd-color-secondary:    #adb5bd; // $gd-gray-400
+}
+
+// 1. OS-level preference
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include dark-theme-variables;
+  }
+}
+
+// 2. Manual attribute toggle
+[data-theme="dark"] {
+  @include dark-theme-variables;
+}

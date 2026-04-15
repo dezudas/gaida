@@ -1,0 +1,29 @@
+// =============================================================================
+// tokens/_breakpoints.scss
+// Responsive breakpoint tokens.
+//
+// Named breakpoints are the only authoritative breakpoint values;
+// never write raw pixel values in media queries — always use respond-to().
+//
+// Public API:
+//   $breakpoints  — map consumed by mixins/_respond-to.scss
+//   $size-{xs..2x} — backward-compat raw variables
+// =============================================================================
+
+/// @public Named breakpoint map — consumed by mixins/respond-to().
+$breakpoints: (
+  "xs":  480px,
+  "sm":  600px,
+  "md":  840px,
+  "lg":  960px,
+  "xl":  1280px,
+  "2xl": 1440px,
+) !default;
+
+// Backward-compat scalar aliases (used in existing _Grid.scss)
+$size-xs: map-get($breakpoints, "xs") !default;
+$size-sm: map-get($breakpoints, "sm") !default;
+$size-md: map-get($breakpoints, "md") !default;
+$size-lg: map-get($breakpoints, "lg") !default;
+$size-xl: map-get($breakpoints, "xl") !default;
+$size-2x: map-get($breakpoints, "2xl") !default;

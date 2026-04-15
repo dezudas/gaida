@@ -1,0 +1,141 @@
+// =============================================================================
+// tokens/_spacing.scss
+// Spacing, border-radius, shadow, and z-index design tokens.
+//
+// Spacing uses a 4px base unit (0.4rem with html { font-size: 62.5% }).
+// Scale: $space-1 (4px) → $space-12 (48px), plus named semantic aliases.
+//
+// Public API:
+//   $space-{1..16}        — raw scale steps
+//   $spacing-map          — map version for @each loops in utilities
+//   $radius-map           — border-radius scale
+//   $shadow-map           — elevation shadow scale
+//   $z-index-map          — z-index levels
+// =============================================================================
+
+@use "sass:math";
+
+// ---------------------------------------------------------------------------
+// Spacing scale — 4px base unit
+// ---------------------------------------------------------------------------
+
+$space-unit: 0.4rem !default;  // 4px
+
+/// @public Raw spacing steps. Prefer $spacing-map for programmatic use.
+$space-0:   0           !default;
+$space-1:   $space-unit * 1   !default; //  4px
+$space-2:   $space-unit * 2   !default; //  8px
+$space-3:   $space-unit * 3   !default; // 12px
+$space-4:   $space-unit * 4   !default; // 16px
+$space-5:   $space-unit * 5   !default; // 20px
+$space-6:   $space-unit * 6   !default; // 24px
+$space-8:   $space-unit * 8   !default; // 32px
+$space-10:  $space-unit * 10  !default; // 40px
+$space-12:  $space-unit * 12  !default; // 48px
+$space-16:  $space-unit * 16  !default; // 64px
+$space-20:  $space-unit * 20  !default; // 80px
+$space-24:  $space-unit * 24  !default; // 96px
+
+/// @public Map used for utility generation (@each in utilities/_spacing.scss).
+$spacing-map: (
+  "0":  $space-0,
+  "1":  $space-1,
+  "2":  $space-2,
+  "3":  $space-3,
+  "4":  $space-4,
+  "5":  $space-5,
+  "6":  $space-6,
+  "8":  $space-8,
+  "10": $space-10,
+  "12": $space-12,
+  "16": $space-16,
+  "20": $space-20,
+  "24": $space-24,
+) !default;
+
+// Backward-compat layout spacing alias (used in layout/_grid.scss)
+$layout-spacing:    $space-4 !default;  // 16px gutter
+$layout-spacing-sm: $space-2 !default;
+$layout-spacing-lg: $space-8 !default;
+
+// ---------------------------------------------------------------------------
+// Border-radius scale
+// ---------------------------------------------------------------------------
+
+/// @public
+$radius-map: (
+  "none": 0,
+  "sm":   0.2rem,
+  "md":   0.4rem,
+  "lg":   0.8rem,
+  "xl":   1.6rem,
+  "full": 9999px,
+) !default;
+
+$radius-sm:   map-get($radius-map, "sm");
+$radius-md:   map-get($radius-map, "md");
+$radius-lg:   map-get($radius-map, "lg");
+$radius-full: map-get($radius-map, "full");
+
+// ---------------------------------------------------------------------------
+// Shadow / elevation scale
+// ---------------------------------------------------------------------------
+
+/// @public
+$shadow-map: (
+  "none": none,
+  "xs":   0 0.1rem 0.2rem rgba(0, 0, 0, 0.06),
+  "sm":   0 0.1rem 0.4rem rgba(0, 0, 0, 0.08),
+  "md":   0 0.4rem 1.2rem rgba(0, 0, 0, 0.10),
+  "lg":   0 0.8rem 2.4rem rgba(0, 0, 0, 0.12),
+  "xl":   0 1.6rem 4.8rem rgba(0, 0, 0, 0.14),
+) !default;
+
+$shadow-sm: map-get($shadow-map, "sm");
+$shadow-md: map-get($shadow-map, "md");
+$shadow-lg: map-get($shadow-map, "lg");
+
+// ---------------------------------------------------------------------------
+// Z-index scale — named levels prevent magic numbers in components
+// ---------------------------------------------------------------------------
+
+/// @public
+$z-index-map: (
+  "below":    -1,
+  "base":      0,
+  "raised":   10,
+  "dropdown": 100,
+  "sticky":   200,
+  "overlay":  300,
+  "modal":    400,
+  "toast":    500,
+  "tooltip":  600,
+) !default;
+
+$z-dropdown: map-get($z-index-map, "dropdown");
+$z-sticky:   map-get($z-index-map, "sticky");
+$z-overlay:  map-get($z-index-map, "overlay");
+$z-modal:    map-get($z-index-map, "modal");
+
+// ---------------------------------------------------------------------------
+// CSS custom properties
+// ---------------------------------------------------------------------------
+
+:root {
+  --gd-space-1:  #{$space-1};
+  --gd-space-2:  #{$space-2};
+  --gd-space-3:  #{$space-3};
+  --gd-space-4:  #{$space-4};
+  --gd-space-6:  #{$space-6};
+  --gd-space-8:  #{$space-8};
+  --gd-space-12: #{$space-12};
+
+  --gd-radius-sm:   #{$radius-sm};
+  --gd-radius-md:   #{$radius-md};
+  --gd-radius-lg:   #{$radius-lg};
+  --gd-radius-full: #{$radius-full};
+
+  --gd-shadow-sm: #{$shadow-sm};
+  --gd-shadow-md: #{$shadow-md};
+  --gd-shadow-lg: #{$shadow-lg};
+}

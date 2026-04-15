@@ -1,28 +1,1071 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>title</title>
+    <title>Gaida CSS Framework - Examples</title>
     <meta name="author" content="Gaida">
-    <meta name="description" content="Gaida sample page">
-    <meta name="keywords" content="keywords,here">
+    <meta name="description" content="Gaida - A minimalist CSS framework. Examples showcasing all available components and samples.">
+    <meta name="keywords" content="css, framework, minimal, responsive, flexbox, grid">
     <link rel="shortcut icon" href="favicon.ico" type="image/vnd.microsoft.icon">
     <link rel="stylesheet" href="stylesheet.css" type="text/css">
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-XXXXXXXX-Y']);
-        _gaq.push(['_trackPageview']);
-        (function()
-        {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+    <style>
+        :root {
+            --color-primary: #171717;
+            --color-secondary: #404040;
+            --color-accent: #D4AF37;
+            --color-bg: #FFFFFF;
+            --color-bg-alt: #FAFAFA;
+            --color-border: #E5E5E5;
+            --color-text: #171717;
+            --color-text-muted: #737373;
+            --color-code-bg: #F5F5F5;
+            --color-code-text: #171717;
+            --sidebar-width: 260px;
+            --transition: 150ms ease;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--color-text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--color-bg);
+            border-right: 1px solid var(--color-border);
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: -0.02em;
+        }
+
+        .sidebar-header p {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+
+        .nav-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-section-title {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-list li {
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-list a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-secondary);
+            text-decoration: none;
+            border-radius: 0.375rem;
+            transition: all var(--transition);
+        }
+
+        .nav-list a:hover {
+            background: var(--color-bg-alt);
+            color: var(--color-text);
+        }
+
+        .nav-list a.active {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 2rem 3rem;
+            max-width: calc(100% - var(--sidebar-width));
+        }
+
+        .hero {
+            padding: 3rem 0 4rem;
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin: 0 0 1rem 0;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+            margin: 0;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            scroll-margin-top: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 0;
+        }
+
+        .section-badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            background: var(--color-bg-alt);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .subsection-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-secondary);
+            margin: 2rem 0 1rem 0;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .demo-item {
+            background: var(--color-bg-alt);
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--color-border);
+        }
+
+        .demo-item label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            background: var(--color-code-bg);
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.8125rem;
+            color: var(--color-code-text);
+        }
+
+        .code-block {
+            position: relative;
+            margin: 1.5rem 0;
+        }
+
+        .code-block-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--color-primary);
+            color: white;
+            padding: 0.625rem 1rem;
+            border-radius: 0.5rem 0.5rem 0 0;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            padding: 0.375rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-btn.copied {
+            background: var(--color-accent);
+            color: var(--color-primary);
+        }
+
+        .copy-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 1.25rem;
+            background: var(--color-code-bg);
+            border-radius: 0 0 0.5rem 0.5rem;
+            overflow-x: auto;
+            border: 1px solid var(--color-border);
+            border-top: none;
+        }
+
+        .code-block pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.8125rem;
+            line-height: 1.7;
+            color: var(--color-code-text);
+        }
+
+        .component-preview {
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .box {
+            padding: 0.75rem;
+            text-align: center;
+            background: var(--color-bg-alt);
+            border: 1px dashed var(--color-border);
+            border-radius: 0.375rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        .semantic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .semantic-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.375rem;
+        }
+
+        .semantic-item span {
+            font-size: 0.875rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        table th,
+        table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        table th {
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-muted);
+            background: var(--color-bg-alt);
+        }
+
+        table td {
+            font-size: 0.875rem;
+        }
+
+        table tbody tr:hover {
+            background: var(--color-bg-alt);
+        }
+
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid var(--color-border);
+            margin-top: 3rem;
+        }
+
+        footer p {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+                max-width: 100%;
+                padding: 1.5rem;
+            }
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            .section-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>Gaida CSS</h1>
+                <p>v1.0 Examples</p>
+            </div>
+            <nav>
+                <div class="nav-section">
+                    <div class="nav-section-title">Foundation</div>
+                    <ul class="nav-list">
+                        <li><a href="#typography">Typography</a></li>
+                        <li><a href="#colors">Colors</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Components</div>
+                    <ul class="nav-list">
+                        <li><a href="#buttons">Buttons</a></li>
+                        <li><a href="#forms">Forms</a></li>
+                        <li><a href="#tables">Tables</a></li>
+                        <li><a href="#lists">Lists</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Layout</div>
+                    <ul class="nav-list">
+                        <li><a href="#grids">Grid System</a></li>
+                    </ul>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Utilities</div>
+                    <ul class="nav-list">
+                        <li><a href="#utilities">Utilities</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
 
+        <main class="main-content">
+            <header class="hero">
+                <h1>Component Examples</h1>
+                <p>A comprehensive showcase of all Gaida CSS components. Click any code block to copy.</p>
+            </header>
+
+            <section id="typography">
+                <div class="section-header">
+                    <h2 class="section-title">Typography</h2>
+                    <span class="section-badge">Foundation</span>
+                </div>
+
+                <h3 class="subsection-title">Headings</h3>
+                <div class="component-preview">
+                    <h1>Heading h1 — 4.6rem</h1>
+                    <h2>Heading h2 — 3.6rem</h2>
+                    <h3>Heading h3 — 2.8rem</h3>
+                    <h4>Heading h4 — 2.2rem</h4>
+                    <h5>Heading h5 — 1.8rem</h5>
+                    <h6>Heading h6 — 1.6rem</h6>
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;h1&gt;Heading h1 — 4.6rem&lt;/h1&gt;
+&lt;h2&gt;Heading h2 — 3.6rem&lt;/h2&gt;
+&lt;h3&gt;Heading h3 — 2.8rem&lt;/h3&gt;
+&lt;h4&gt;Heading h4 — 2.2rem&lt;/h4&gt;
+&lt;h5&gt;Heading h5 — 1.8rem&lt;/h5&gt;
+&lt;h6&gt;Heading h6 — 1.6rem&lt;/h6&gt;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">Semantic Text Elements</h3>
+                <div class="semantic-grid">
+                    <div class="semantic-item">
+                        <abbr title="Internationalization">I18N</abbr>
+                        <code>&lt;abbr&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <strong>Bold</strong>
+                        <code>&lt;strong&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <cite>Citation</cite>
+                        <code>&lt;cite&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <code>Hello World!</code>
+                        <code>&lt;code&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <del>Deleted</del>
+                        <code>&lt;del&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <em>Emphasis</em>
+                        <code>&lt;em&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <i>Italic</i>
+                        <code>&lt;i&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <ins>Inserted</ins>
+                        <code>&lt;ins&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <kbd>Ctrl + S</kbd>
+                        <code>&lt;kbd&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <mark>Highlighted</mark>
+                        <code>&lt;mark&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <s>Strikethrough</s>
+                        <code>&lt;s&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <samp>Sample</samp>
+                        <code>&lt;samp&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        Text <sub>Subscripted</sub>
+                        <code>&lt;sub&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        Text <sup>Superscripted</sup>
+                        <code>&lt;sup&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <time>20:00</time>
+                        <code>&lt;time&gt;</code>
+                    </div>
+                    <div class="semantic-item">
+                        <u>Underline</u>
+                        <code>&lt;u&gt;</code>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">South Asian Font Optimization</h3>
+                <div class="component-preview">
+                    <h6>Hindi</h6>
+                    <p>गैंडा ढाँचा प्रयोग किजिये ओर मज्जा लिजिये</p>
+                    <h6>Nepali</h6>
+                    <p>गैंडा ढाँचा प्रयोग गरेर मज्जा लिनुहोस्</p>
+                    <h6>Urdu</h6>
+                    <p>گائے فریم ورک کا استعمال کرتے ہوئے لطف اندوز</p>
+                </div>
+            </section>
+
+            <section id="buttons">
+                <div class="section-header">
+                    <h2 class="section-title">Buttons</h2>
+                    <span class="section-badge">Component</span>
+                </div>
+
+                <h3 class="subsection-title">Default Button</h3>
+                <div class="component-preview" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a class="button" href="#">Default Button</a>
+                    <button class="button">Default Button</button>
+                    <input class="button" type="submit" value="Default Button">
+                    <input class="button" type="button" value="Default Button">
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;a class="button" href="#"&gt;Default Button&lt;/a&gt;
+&lt;button class="button"&gt;Default Button&lt;/button&gt;
+&lt;input class="button" type="submit" value="Default Button"&gt;
+&lt;input class="button" type="button" value="Default Button"&gt;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">Outline Button</h3>
+                <div class="component-preview" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a class="button button-outline" href="#">Outlined Button</a>
+                    <button class="button button-outline">Outlined Button</button>
+                    <input class="button button-outline" type="submit" value="Outlined Button">
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;a class="button button-outline" href="#"&gt;Outlined Button&lt;/a&gt;
+&lt;button class="button button-outline"&gt;Outlined Button&lt;/button&gt;
+&lt;input class="button button-outline" type="submit" value="Outlined Button"&gt;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">Clear Button</h3>
+                <div class="component-preview" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a class="button button-clear" href="#">Clear Button</a>
+                    <button class="button button-clear">Clear Button</button>
+                    <input class="button button-clear" type="submit" value="Clear Button">
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;a class="button button-clear" href="#"&gt;Clear Button&lt;/a&gt;
+&lt;button class="button button-clear"&gt;Clear Button&lt;/button&gt;
+&lt;input class="button button-clear" type="submit" value="Clear Button"&gt;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">Disabled States</h3>
+                <div class="component-preview" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a class="button" disabled href="#">Default Disabled</a>
+                    <a class="button button-outline" disabled href="#">Outline Disabled</a>
+                    <a class="button button-clear" disabled href="#">Clear Disabled</a>
+                    <button class="button" disabled>Button Disabled</button>
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;a class="button" disabled href="#"&gt;Default Disabled&lt;/a&gt;
+&lt;a class="button button-outline" disabled href="#"&gt;Outline Disabled&lt;/a&gt;
+&lt;a class="button button-clear" disabled href="#"&gt;Clear Disabled&lt;/a&gt;
+&lt;button class="button" disabled&gt;Button Disabled&lt;/button&gt;</code></pre>
+                </div>
+            </section>
+
+            <section id="forms">
+                <div class="section-header">
+                    <h2 class="section-title">Forms</h2>
+                    <span class="section-badge">Component</span>
+                </div>
+
+                <div class="component-preview">
+                    <form>
+                        <div class="two-column">
+                            <div>
+                                <label for="textField">Text field</label>
+                                <input type="text" placeholder="Text field" id="textField">
+                                
+                                <label for="emailField">Email field</label>
+                                <input type="email" id="emailField" placeholder="Email field">
+                                
+                                <label for="numberField">Number field</label>
+                                <input type="number" id="numberField" placeholder="Number field">
+                                
+                                <label for="passwordField">Password field</label>
+                                <input type="password" id="passwordField" placeholder="Password field">
+                                
+                                <label for="selectField">Select field</label>
+                                <select id="selectField">
+                                    <option value="1">Option 1</option>
+                                    <option value="2">Option 2</option>
+                                    <option value="3">Option 3</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="telField">Tel field</label>
+                                <input type="tel" id="telField" placeholder="Tel field">
+                                
+                                <label for="urlField">URL field</label>
+                                <input type="url" id="urlField" placeholder="URL field">
+                                
+                                <label>Radio field</label>
+                                <div style="display: flex; gap: 1rem;">
+                                    <label class="label-inline"><input type="radio" name="radio"> Radio 1</label>
+                                    <label class="label-inline"><input type="radio" name="radio"> Radio 2</label>
+                                </div>
+                                
+                                <label>Checkbox field</label>
+                                <div style="display: flex; gap: 1rem;">
+                                    <label class="label-inline"><input type="checkbox"> Checkbox 1</label>
+                                    <label class="label-inline"><input type="checkbox"> Checkbox 2</label>
+                                </div>
+                                
+                                <label for="textareaField">Textarea field</label>
+                                <textarea placeholder="Textarea field" id="textareaField" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;form&gt;
+    &lt;label for="textField"&gt;Text field&lt;/label&gt;
+    &lt;input type="text" placeholder="Text field" id="textField"&gt;
+    
+    &lt;label for="emailField"&gt;Email field&lt;/label&gt;
+    &lt;input type="email" id="emailField" placeholder="Email field"&gt;
+    
+    &lt;label for="selectField"&gt;Select field&lt;/label&gt;
+    &lt;select id="selectField"&gt;
+        &lt;option value="1"&gt;Option 1&lt;/option&gt;
+        &lt;option value="2"&gt;Option 2&lt;/option&gt;
+    &lt;/select&gt;
+    
+    &lt;label&gt;Radio field&lt;/label&gt;
+    &lt;label class="label-inline"&gt;&lt;input type="radio"&gt; Radio 1&lt;/label&gt;
+    
+    &lt;label&gt;Checkbox field&lt;/label&gt;
+    &lt;label class="label-inline"&gt;&lt;input type="checkbox"&gt; Checkbox 1&lt;/label&gt;
+    
+    &lt;label for="textareaField"&gt;Textarea field&lt;/label&gt;
+    &lt;textarea id="textareaField"&gt;&lt;/textarea&gt;
+    
+    &lt;input type="submit"&gt;
+    &lt;input type="reset" class="button-clear"&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+            </section>
+
+            <section id="tables">
+                <div class="section-header">
+                    <h2 class="section-title">Tables</h2>
+                    <span class="section-badge">Component</span>
+                </div>
+
+                <div class="component-preview" style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Height</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Kevin Durant</td>
+                                <td>27</td>
+                                <td>2.06</td>
+                                <td>Washington, DC</td>
+                            </tr>
+                            <tr>
+                                <td>Stephen Curry</td>
+                                <td>27</td>
+                                <td>1.91</td>
+                                <td>Akron, OH</td>
+                            </tr>
+                            <tr>
+                                <td>Klay Thompson</td>
+                                <td>25</td>
+                                <td>2.01</td>
+                                <td>Los Angeles, CA</td>
+                            </tr>
+                            <tr>
+                                <td>Draymond Green</td>
+                                <td>26</td>
+                                <td>2.01</td>
+                                <td>Saginaw, MI</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Name&lt;/th&gt;
+            &lt;th&gt;Age&lt;/th&gt;
+            &lt;th&gt;Height&lt;/th&gt;
+            &lt;th&gt;Location&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Kevin Durant&lt;/td&gt;
+            &lt;td&gt;27&lt;/td&gt;
+            &lt;td&gt;2.06&lt;/td&gt;
+            &lt;td&gt;Washington, DC&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+            </section>
+
+            <section id="lists">
+                <div class="section-header">
+                    <h2 class="section-title">Lists</h2>
+                    <span class="section-badge">Component</span>
+                </div>
+
+                <div class="two-column">
+                    <div>
+                        <h3 class="subsection-title">Unordered List</h3>
+                        <ul>
+                            <li>Unordered list item 1</li>
+                            <li>Unordered list item 2</li>
+                            <li>Unordered list item 3
+                                <ul>
+                                    <li>Nested item 3.1</li>
+                                    <li>Nested item 3.2</li>
+                                    <li>Nested item 3.3</li>
+                                </ul>
+                            </li>
+                            <li>Unordered list item 4</li>
+                            <li>Unordered list item 5</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="subsection-title">Ordered List</h3>
+                        <ol>
+                            <li>Ordered list item 1</li>
+                            <li>Ordered list item 2</li>
+                            <li>Ordered list item 3
+                                <ol>
+                                    <li>Nested item 3.1</li>
+                                    <li>Nested item 3.2</li>
+                                    <li>Nested item 3.3</li>
+                                </ol>
+                            </li>
+                            <li>Ordered list item 4</li>
+                            <li>Ordered list item 5</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;!-- Unordered List --&gt;
+&lt;ul&gt;
+    &lt;li&gt;List item 1&lt;/li&gt;
+    &lt;li&gt;List item 2
+        &lt;ul&gt;
+            &lt;li&gt;Nested item&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;List item 3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Ordered List --&gt;
+&lt;ol&gt;
+    &lt;li&gt;List item 1&lt;/li&gt;
+    &lt;li&gt;List item 2
+        &lt;ol&gt;
+            &lt;li&gt;Nested item&lt;/li&gt;
+        &lt;/ol&gt;
+    &lt;/li&gt;
+    &lt;li&gt;List item 3&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                </div>
+            </section>
+
+            <section id="grids">
+                <div class="section-header">
+                    <h2 class="section-title">Grid System</h2>
+                    <span class="section-badge">Layout</span>
+                </div>
+
+                <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">12-column flexbox responsive grid system with 5 breakpoints.</p>
+
+                <h3 class="subsection-title">Two Columns (6 + 6)</h3>
+                <div class="component-preview">
+                    <div class="grid">
+                        <div class="column col-6"><div class="box">col-6</div></div>
+                        <div class="column col-6"><div class="box">col-6</div></div>
+                    </div>
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;div class="grid"&gt;
+    &lt;div class="column col-6"&gt;...&lt;/div&gt;
+    &lt;div class="column col-6"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">Three Columns (4 + 4 + 4)</h3>
+                <div class="component-preview">
+                    <div class="grid">
+                        <div class="column col-4"><div class="box">col-4</div></div>
+                        <div class="column col-4"><div class="box">col-4</div></div>
+                        <div class="column col-4"><div class="box">col-4</div></div>
+                    </div>
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;div class="grid"&gt;
+    &lt;div class="column col-4"&gt;...&lt;/div&gt;
+    &lt;div class="column col-4"&gt;...&lt;/div&gt;
+    &lt;div class="column col-4"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <h3 class="subsection-title">Four Columns (3 + 3 + 3 + 3)</h3>
+                <div class="component-preview">
+                    <div class="grid">
+                        <div class="column col-3"><div class="box">col-3</div></div>
+                        <div class="column col-3"><div class="box">col-3</div></div>
+                        <div class="column col-3"><div class="box">col-3</div></div>
+                        <div class="column col-3"><div class="box">col-3</div></div>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">Responsive Grid</h3>
+                <p style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 1rem;">Resize to see breakpoint behavior</p>
+                <div class="component-preview">
+                    <div class="grid">
+                        <div class="column col-8 col-md-12"><div class="box">col-8 col-md-12</div></div>
+                        <div class="column col-4 col-md-12"><div class="box">col-4 col-md-12</div></div>
+                    </div>
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;div class="grid"&gt;
+    &lt;div class="column col-8 col-md-12"&gt;...&lt;/div&gt;
+    &lt;div class="column col-4 col-md-12"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section id="blockquote">
+                <div class="section-header">
+                    <h2 class="section-title">Blockquote</h2>
+                    <span class="section-badge">Component</span>
+                </div>
+
+                <div class="two-column">
+                    <div>
+                        <h3 class="subsection-title">Inline Quote</h3>
+                        <p><q>Yeah!! Gaida is amazing.</q></p>
+                    </div>
+                    <div>
+                        <h3 class="subsection-title">Blockquote Element</h3>
+                        <blockquote>
+                            <p><em>Yeah!! Gaida is amazing.</em></p>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;!-- Inline Quote --&gt;
+&lt;p&gt;&lt;q&gt;Yeah!! Gaida is amazing.&lt;/q&gt;&lt;/p&gt;
+
+&lt;!-- Blockquote --&gt;
+&lt;blockquote&gt;
+    &lt;p&gt;&lt;em&gt;Yeah!! Gaida is amazing.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</code></pre>
+                </div>
+            </section>
+
+            <section id="utilities">
+                <div class="section-header">
+                    <h2 class="section-title">Utilities</h2>
+                    <span class="section-badge">Utilities</span>
+                </div>
+
+                <h3 class="subsection-title">Float Utilities</h3>
+                <div class="component-preview">
+                    <div class="clearfix">
+                        <img class="float-left" src="https://placehold.co/320x200/e5e5e5/737373?text=float+left" alt="float left example" style="max-width: 100%; border-radius: 0.25rem; margin-right: 1rem;">
+                        <img class="float-right" src="https://placehold.co/320x200/e5e5e5/737373?text=float+right" alt="float right example" style="max-width: 100%; border-radius: 0.25rem; margin-left: 1rem;">
+                    </div>
+                </div>
+                <div class="code-block">
+                    <div class="code-block-header">
+                        <span>HTML</span>
+                        <button class="copy-btn" onclick="copyCode(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Copy
+                        </button>
+                    </div>
+<pre><code>&lt;div class="clearfix"&gt;
+    &lt;img class="float-left" src="..." alt="..."&gt;
+    &lt;img class="float-right" src="..." alt="..."&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <footer>
+                <p>Gaida CSS Framework — A minimalist, mobile-first CSS framework.</p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.closest('.code-block');
+            const code = codeBlock.querySelector('code').textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                button.classList.add('copied');
+                button.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    Copied!
+                `;
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        Copy
+                    `;
+                }, 2000);
+            });
+        }
+
+        const navLinks = document.querySelectorAll('.nav-list a');
+        const sections = document.querySelectorAll('section');
+
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+        updateActiveNav();
+    </script>
 </body>
 </html>

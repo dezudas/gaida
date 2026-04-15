@@ -1,20 +1,30 @@
+// =============================================================================
+// gaida.scss (Main Entry Point)
+// Combines all modern architecture modules.
+//
+// The new structure replaces @import with @use/@forward for proper scoping.
+// =============================================================================
 
-// Sass Modules
-// ––––––––––––––––––––––––––––––––––––––––––––––––––
+// 1. Tokens (Design Tokens: colors, typography, spacing, breakpoints)
+// These emit :root CSS variables and define raw Sass variables.
+@use "tokens";
 
-@import 'Color';
-@import 'Variables';
-@import 'Base';
-@import 'Blockquote';
-@import 'Button';
-@import 'Code';
-@import 'Divider';
-@import 'Form';
-@import 'Grid';
-@import 'Link';
-@import 'List';
-@import 'Spacing';
-@import 'Table';
-@import 'Typography';
-@import 'Image';
-@import 'Utility';
+// 2. Mixins & Functions (No initial CSS output)
+// pure logic helpers
+@use "mixins";
+
+// 3. Base (Reset & baseline elements)
+// HTML, body, typography base, normalization
+@use "base";
+
+// 4. Layout (Grid system, containers, framing)
+@use "layout";
+
+// 5. Components (Discrete UI elements)
+@use "components";
+
+// 6. Utilities (Helper classes — high specificity)
+@use "utilities";
+
+// 7. Themes (Dark mode overrides)
+@use "themes";

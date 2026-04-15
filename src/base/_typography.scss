@@ -1,0 +1,174 @@
+@use "../tokens" as *;
+
+// =============================================================================
+// base/_typography.scss
+// Baseline type styles — headings, body copy, blockquote, code, lists.
+// All values pull from token variables; no hardcoded colors or sizes here.
+//
+// Depends on: tokens/_typography.scss, tokens/_color.scss, tokens/_spacing.scss
+// =============================================================================
+
+// ---------------------------------------------------------------------------
+// Headings — generated from $type-scale map
+// ---------------------------------------------------------------------------
+
+%heading-base {
+  font-weight: 300;
+  margin-bottom: var(--gd-space-2);
+  margin-top: 0;
+  line-height: 1.25;
+  color: var(--gd-color-text);
+}
+
+@each $tag, $config in $type-scale {
+  #{$tag} {
+    @extend %heading-base;
+    font-size: nth($config, 1);
+    line-height: nth($config, 2);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Body copy
+// ---------------------------------------------------------------------------
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--gd-space-6);
+}
+
+// ---------------------------------------------------------------------------
+// Links (semantic baseline — already styled in base/_reset.scss)
+// Additional visited/active states here:
+// ---------------------------------------------------------------------------
+
+a:visited {
+  color: var(--gd-color-primary);
+}
+
+// ---------------------------------------------------------------------------
+// Blockquote
+// ---------------------------------------------------------------------------
+
+blockquote {
+  border-left: 0.3rem solid var(--gd-color-border);
+  margin: 0 0 var(--gd-space-6);
+  padding: var(--gd-space-3) var(--gd-space-4);
+  color: var(--gd-color-text-muted);
+  font-style: italic;
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Inline code & preformatted blocks
+// ---------------------------------------------------------------------------
+
+code {
+  background: var(--gd-color-surface);
+  border-radius: var(--gd-radius-sm);
+  font-family: var(--gd-font-mono);
+  font-size: 86%;
+  margin: 0 0.2rem;
+  padding: 0.2rem 0.5rem;
+  white-space: nowrap;
+}
+
+pre {
+  background: var(--gd-color-surface);
+  border-left: 0.3rem solid var(--gd-color-primary);
+  border-radius: var(--gd-radius-md);
+  margin-bottom: var(--gd-space-6);
+  overflow-x: auto;
+
+  > code {
+    border-radius: 0;
+    display: block;
+    font-size: $font-size-sm;
+    padding: var(--gd-space-4) var(--gd-space-6);
+    white-space: pre;
+    margin: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Lists
+// ---------------------------------------------------------------------------
+
+ul,
+ol {
+  margin-top: 0;
+  margin-bottom: var(--gd-space-6);
+  padding-left: var(--gd-space-6);
+}
+
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
+// Nested lists
+ul ul,
+ol ol,
+ul ol,
+ol ul {
+  font-size: 90%;
+  margin-bottom: 0;
+  margin-top: var(--gd-space-2);
+}
+
+li {
+  margin-bottom: var(--gd-space-1);
+}
+
+// Description list
+dl {
+  margin-bottom: var(--gd-space-6);
+}
+
+dt {
+  font-weight: 700;
+  margin-bottom: var(--gd-space-1);
+}
+
+dd {
+  margin: 0 0 var(--gd-space-3) var(--gd-space-4);
+}
+
+// ---------------------------------------------------------------------------
+// Horizontal rule (semantic override of reset)
+// ---------------------------------------------------------------------------
+
+hr {
+  margin: var(--gd-space-8) 0;
+}
+
+// ---------------------------------------------------------------------------
+// Text utilities (semantic, no !important — keep specificity flat)
+// ---------------------------------------------------------------------------
+
+.text-muted     { color: var(--gd-color-text-muted); }
+.text-primary   { color: var(--gd-color-primary); }
+.text-success   { color: var(--gd-color-success); }
+.text-warning   { color: var(--gd-color-warning); }
+.text-danger    { color: var(--gd-color-danger); }
+
+.text-monospace { font-family: var(--gd-font-mono); }
+.text-serif     { font-family: var(--gd-font-serif); }
+
+.text-left      { text-align: left; }
+.text-center    { text-align: center; }
+.text-right     { text-align: right; }
+.text-justify   { text-align: justify; }
+.text-nowrap    { white-space: nowrap; }
+
+.text-sm   { font-size: var(--gd-font-size-sm); }
+.text-lg   { font-size: var(--gd-font-size-lg); }
+.text-xl   { font-size: var(--gd-font-size-xl); }
+.text-bold { font-weight: 700; }
+.text-thin { font-weight: 300; }

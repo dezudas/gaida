@@ -1,0 +1,102 @@
+@use "../tokens" as *;
+@use "../mixins" as *;
+
+// =============================================================================
+// components/_card.scss
+// Card component — surface container with optional header, body, footer.
+//
+// Classes:
+//   .card               — base card container
+//   .card-header        — top section (title area)
+//   .card-body          — main content area
+//   .card-footer        — bottom action area
+//   .card-image         — full-width image at the top
+//   .card-sm .card-lg   — density modifiers
+//   .card-flat          — no shadow, just border
+//   .card-hover         — lift effect on hover
+// =============================================================================
+
+.card {
+  background-color: var(--gd-color-surface);
+  border: 0.1rem solid var(--gd-color-border);
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  @include transition(box-shadow transform, 200ms, ease-out);
+}
+
+// ---------------------------------------------------------------------------
+// Sections
+// ---------------------------------------------------------------------------
+
+.card-header {
+  border-bottom: 0.1rem solid var(--gd-color-border);
+  padding: $space-4 $space-6;
+
+  > :last-child { margin-bottom: 0; }
+}
+
+.card-body {
+  flex: 1;
+  padding: $space-6;
+
+  > :last-child { margin-bottom: 0; }
+}
+
+.card-footer {
+  border-top: 0.1rem solid var(--gd-color-border);
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-4 $space-6;
+}
+
+// ---------------------------------------------------------------------------
+// Image top block
+// ---------------------------------------------------------------------------
+
+.card-image {
+  > img {
+    display: block;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Modifiers
+// ---------------------------------------------------------------------------
+
+/// Flat variant — border only, no shadow
+.card-flat {
+  box-shadow: none;
+}
+
+/// Hover lift effect
+.card-hover {
+  cursor: pointer;
+
+  &:hover,
+  &:focus-within {
+    box-shadow: $shadow-lg;
+    transform: translateY(-0.2rem);
+  }
+}
+
+/// Compact density
+.card-sm {
+  .card-header,
+  .card-footer { padding: $space-3 $space-4; }
+  .card-body   { padding: $space-4; }
+}
+
+/// Loose density
+.card-lg {
+  .card-header,
+  .card-footer { padding: $space-6 $space-8; }
+  .card-body   { padding: $space-8; }
+}

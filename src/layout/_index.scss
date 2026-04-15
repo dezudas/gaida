@@ -1,0 +1,8 @@
+// =============================================================================
+// layout/_index.scss
+// Barrel file — forward all layout partials in dependency order.
+// Grid must come before container (container uses grid gap vars).
+// =============================================================================
+
+@forward "grid";
+@forward "container";
